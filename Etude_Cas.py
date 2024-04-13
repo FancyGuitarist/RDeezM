@@ -110,9 +110,7 @@ print(f'V = {V}, M = {M}')
 # define what is missing for tau
 
 t = np.max(x_top_main) - np.min(x_top_main)
-print(f'x_max = {np.max(x_top_main)}, ')
 Ix = 9.8490*10**(-5)
-
 
 l = np.linspace(0, 1.51, len(v))
 c_p = 0.340
@@ -170,12 +168,13 @@ plt.xlim([0, 1])
 # plt.savefig(f"Graph_top", bbox_inches='tight',dpi=600)
 plt.show()
 
-# Plot V on Wing
-plt.plot(l, tau, color='blue')
+# Plot tau on Wing
+#plt.plot(l, tau, color='blue')
+plt.plot(c**2, tau, color='Red')
 plt.tick_params(axis="y", direction="in")
 plt.tick_params(axis="x", direction="in")
-plt.xlabel("l")
+plt.xlabel("c**2")
 plt.ylabel('tau')
 # plt.ylim([0, 0.3])
-plt.xlim([0, 1.51])
+plt.xlim([np.min(c**2), np.max(c**2)])
 plt.show()
