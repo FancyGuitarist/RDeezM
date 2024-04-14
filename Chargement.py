@@ -6,16 +6,17 @@ from scipy import integrate
 from scipy.integrate import cumtrapz
 
 title = 'lift_2'
-data = pd.read_csv(f'{title}.csv', delimiter= ',')
+data = pd.read_csv(f'{title}.csv', delimiter=',')
 
 pos = data['Position (m)'].values
 w = data['   Chargement (N/m)'].values
 
-V = integrate.cumtrapz(w,pos,initial = 0)
-M = integrate.cumtrapz(V,pos,initial=0)
+V = integrate.cumtrapz(w, pos, initial=0)
+M = integrate.cumtrapz(V, pos, initial=0)
 M_inv = M[::-1]
 V_inv = V[::-1]
-
+print(f'v = {V_inv}')
+x_fit = np.linspace(0, 1.51, 5000)
 
 def make_poly(fit_coeffs, symbol):
     y_fit = 0
@@ -23,9 +24,10 @@ def make_poly(fit_coeffs, symbol):
         y_fit += value*(symbol**index)
     return y_fit
 
+
 fig = plt.figure()
 ax = fig.add_subplot(111)
-ax.plot(pos, V_inv, color = 'Green')
+ax.plot(x_fit[::-1], w_poly, color = 'Green')
 #ax.plot(pos, M_inv, color = 'Orange')
 #ax.plot(pos, w, color = 'Blue')
 fig.tight_layout()
